@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity() {
     private val viewModel by viewModels<MovieViewModel>()
     lateinit var adapter: MovieAdapter
     private var pageNum = 0
-    var isLoading = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,16 +64,17 @@ class MainActivity : AppCompatActivity() {
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener(){
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 val visibleItemCount = layoutManager.childCount
-                val pastVisibleItem = layoutManager.findFirstCompletelyVisibleItemPosition()
+                val pastVisibleItem = layoutManager.findFirstVisibleItemPosition()
                 val total = adapter.itemCount
-
-                if (!isLoading) {
-
-                    if ((visibleItemCount + pastVisibleItem) >= total) {
-                        pageNum++
+                if   ((visibleItemCount + pastVisibleItem) >= total && pastVisibleItem>=0)  {
+                    if (list.last().hasMoreMovie) {
+                        pageNum+=20
                         viewModel.getDataForShow(pageNum)
+                    } else {
+                        Toast.makeText(this@MainActivity, "All data loaded", Toast.LENGTH_SHORT).show()
                     }
                 }
+                adapter.notifyDataSetChanged()
                 super.onScrolled(recyclerView, dx, dy)
             }
         })
