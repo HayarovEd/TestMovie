@@ -2,4 +2,5 @@
     <string name="app_name">TestMovie</string>
     <string name="title">Название</string>
     <string name="description">Описание</string>
+    <string name="ny_times">Обзоры NY Times</string>
 </resources>

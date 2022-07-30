@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity() {
     private val viewModel by viewModels<MovieViewModel>()
     lateinit var adapter: MovieAdapter
     private var pageNum = 0
-    var page = -1
     var isLoading = false
 
 
