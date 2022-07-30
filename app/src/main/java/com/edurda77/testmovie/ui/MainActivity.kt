@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.movieData.observe(this) {
             when (it) {
                 is StateMainActivity.Loading->{
-                    binding.recyclerViewMovie.isVisible=false
+                    binding.recyclerViewMovie.isVisible=true
                     binding.progressBarFirst.isVisible=true
                 }
                 is StateMainActivity.Failure -> {
